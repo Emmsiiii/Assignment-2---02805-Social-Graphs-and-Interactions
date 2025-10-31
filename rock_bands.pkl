@@ -1,0 +1,47 @@
+import pickle
+import random
+
+# Step 1: Band names 
+band_names = [
+    "The Beatles", "Pink Floyd", "Led Zeppelin", "The Rolling Stones", "The Who",
+    "Queen", "AC/DC", "Metallica", "Nirvana", "Radiohead", "Coldplay", "Green Day",
+    "The Doors", "U2", "Oasis", "Blur", "Red Hot Chili Peppers", "The Kinks",
+    "The Smiths", "Muse", "Deep Purple", "The Clash", "Arctic Monkeys", "The Cure",
+    "The Strokes", "Fleetwood Mac", "Joy Division", "Pearl Jam", "Foo Fighters",
+    "Bon Jovi", "Iron Maiden", "KISS", "The Police", "Genesis", "Supertramp",
+    "Yes", "King Crimson", "Tame Impala", "Franz Ferdinand", "The Killers",
+    "R.E.M.", "The Smashing Pumpkins", "The Verve", "MGMT", "Imagine Dragons",
+    "Arcade Fire", "Talking Heads", "The Zombies", "The Byrds", "The Yardbirds",
+    "Herman's Hermits", "10cc", "Simon & Garfunkel", "Cream", "ELO", "Depeche Mode",
+    "The Beach Boys", "The Velvet Underground", "Black Sabbath", "Slade",
+    "Status Quo", "Eagles", "ZZ Top", "Beck", "Jefferson Airplane", "Scorpions",
+    "Blur", "The Raconteurs", "The White Stripes", "Kasabian", "The Libertines",
+    "The Hives", "Wolfmother", "The Vines", "Interpol", "The Shins", "Weezer",
+    "Paramore", "Fall Out Boy", "My Chemical Romance", "Kings of Leon", "The 1975"
+]
+
+# Step 2: Genre 
+genres = [
+    "Rock", "Alternative Rock", "Psychedelic Rock", "Hard Rock", "Progressive Rock",
+    "Indie Rock", "Folk Rock", "Pop Rock", "Post-Punk", "Garage Rock", "Metal"
+]
+
+# Step 3: Create dataset
+band_dataset = []
+for band in band_names:
+    genre = random.choice(genres)
+    num_links = random.randint(2, 5)
+    linked_bands = random.sample([b for b in band_names if b != band], num_links)
+    links_str = " ".join([f"[[{b}]]" for b in linked_bands])
+    content = f"{band} is a [[{genre}]] band. Influenced or connected with {links_str}."
+    
+    band_dataset.append({
+        "page_name": band,
+        "content": content
+    })
+
+# Step 4: Save to .pkl file
+with open("my_full_band_dataset.pkl", "wb") as f:
+    pickle.dump(band_dataset, f)
+
+print(f"Created dataset with {len(band_dataset)} bands and saved as my_full_band_dataset.pkl.")
